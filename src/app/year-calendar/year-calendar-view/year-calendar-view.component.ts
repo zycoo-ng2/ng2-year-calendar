@@ -42,7 +42,7 @@ export class YearCalendarViewComponent implements OnInit {
     $('.calendar').calendar(options);
   }
   customDayRenderer = (element, date) => {
-    if (this._dateSourceTime.includes(date.getTime())) {
+    if (this._dateSourceTime.indexOf(date.getTime())) {
       $(element).css('background-color', 'red');
       $(element).css('color', 'white');
       $(element).css('border-radius', '15px');
