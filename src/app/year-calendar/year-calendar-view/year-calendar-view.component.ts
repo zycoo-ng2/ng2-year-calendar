@@ -10,6 +10,7 @@ export class YearCalendarViewComponent implements OnInit {
   @Input()public minDate : any;
   @Output()public renderEnd : EventEmitter < any > = new EventEmitter();
   @Output()public clickDay : EventEmitter < any > = new EventEmitter();
+  public options;
   constructor() {}
 
   @Input()
@@ -27,7 +28,7 @@ export class YearCalendarViewComponent implements OnInit {
 
   ngOnInit() {
     const currentYear = new Date().getFullYear();
-    const options = {
+    this.options = {
       language: this.language,
       dataSource: this._dataSource,
       clickDay: (event, which, data) => {
@@ -46,15 +47,20 @@ export class YearCalendarViewComponent implements OnInit {
         ? this.minDate
         : null
     };
-    $('.calendar').calendar(options);
+    $('.calendar').calendar(this.options);
   }
   customDayRenderer = (element, date) => {
-    if (this._dateSourceTime.indexOf(date.getTime())>=0) {
+    if (this._dateSourceTime.indexOf(date.getTime()) >= 0) {
       $(element).css('background-color', 'red');
       $(element).css('color', 'white');
       $(element).css('border-radius', '15px');
     }
   }
+  updateHighLightDay(data : any[]) {
+    this.options.highlightDay = data;
+    $('.calendar').calendar(this.options);
+  }
+
   updateDateSource(data : any[]) {
     this._dataSource = data.map((item) => {
       item.color = 'white';
