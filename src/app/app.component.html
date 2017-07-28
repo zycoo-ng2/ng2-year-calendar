@@ -1,8 +1,5 @@
-<app-year-calendar-view
-(renderEnd)="renderEnd($event)"
-(clickDay)="clickDay($event)"
-[language]="language"
-[dataSource]="dataSource"></app-year-calendar-view>
+<app-year-calendar-view (renderEnd)="renderEnd($event)" (clickDay)="clickDay($event)" [language]="language" [highlightDay]="[1, 2, 3]"
+  [dataSource]="dataSource"></app-year-calendar-view>
 
 <div class="modal fade" id="editModal">
   <div class="modal-dialog" role="document">

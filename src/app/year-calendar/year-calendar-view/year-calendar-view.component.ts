@@ -1,28 +1,27 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 // import './bootstrap'
-declare var $: any;
-@Component({
-  selector: 'app-year-calendar-view',
-  templateUrl: './year-calendar-view.component.html',
-  styleUrls: ['./year-calendar-view.component.css']
-})
+declare var $ : any;
+@Component({selector: 'app-year-calendar-view', templateUrl: './year-calendar-view.component.html', styleUrls: ['./year-calendar-view.component.css']})
 export class YearCalendarViewComponent implements OnInit {
-  private _dataSource: any[];
-  private _dateSourceTime: Number[];
-  @Input() public language = 'en';
-
-  @Output() public renderEnd: EventEmitter<any> = new EventEmitter();
-  @Output() public clickDay: EventEmitter<any> = new EventEmitter();
-  constructor() { }
+  private _dataSource : any[];
+  private _dateSourceTime : Number[];
+  @Input()public language = 'en';
+  @Input()public highlightDay;
+  @Input()public minDate : any;
+  @Output()public renderEnd : EventEmitter < any > = new EventEmitter();
+  @Output()public clickDay : EventEmitter < any > = new EventEmitter();
+  constructor() {}
 
   @Input()
-  public set dataSource(data: any[]){
+  public set dataSource(data : any[]) {
     this._dataSource = data.map((item) => {
       item.color = 'white';
       return item;
     });
-    this._dateSourceTime = data.map((item ) => {
-      return item.startDate.getTime();
+    this._dateSourceTime = data.map((item) => {
+      return item
+        .startDate
+        .getTime();
     })
   }
 
@@ -32,12 +31,20 @@ export class YearCalendarViewComponent implements OnInit {
       language: this.language,
       dataSource: this._dataSource,
       clickDay: (event, which, data) => {
-        this.clickDay.emit(event);
+        this
+          .clickDay
+          .emit(event);
       },
       renderEnd: (event) => {
-        this.renderEnd.emit(event);
+        this
+          .renderEnd
+          .emit(event);
       },
-      customDayRenderer: this.customDayRenderer
+      customDayRenderer: this.customDayRenderer,
+      highlightDay: this.highlightDay,
+      minDate: this.minDate instanceof Date
+        ? this.minDate
+        : null
     };
     $('.calendar').calendar(options);
   }
@@ -48,14 +55,18 @@ export class YearCalendarViewComponent implements OnInit {
       $(element).css('border-radius', '15px');
     }
   }
-  updateDateSource(data: any[]) {
-     this._dataSource = data.map((item) => {
+  updateDateSource(data : any[]) {
+    this._dataSource = data.map((item) => {
       item.color = 'white';
       return item;
     });
-    this._dateSourceTime = data.map((item ) => {
-      return item.startDate.getTime();
+    this._dateSourceTime = data.map((item) => {
+      return item
+        .startDate
+        .getTime();
     })
-    $('.calendar').data('calendar').setDataSource(this._dataSource);
+    $('.calendar')
+      .data('calendar')
+      .setDataSource(this._dataSource);
   }
 }
