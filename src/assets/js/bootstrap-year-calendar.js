@@ -350,7 +350,6 @@
                 cellContent.addClass('hightlight-day-day');
               }
               cell.append(cellContent);
-              console.log(cellContent)
 
               if (this.options.customDayRenderer) {
                 this
