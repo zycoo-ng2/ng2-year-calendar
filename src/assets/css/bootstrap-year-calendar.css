@@ -134,8 +134,11 @@
 /*@tqcenglish@gmail.com 对每周进行高亮*/
 
 .hightlight-day-header {
-  background-color: lightslategrey;
-  color: white;
+   color: palevioletred;
+}
+
+.hightlight-day-day{
+  color: palevioletred;
 }
 
 .calendar table.month tr td,

@@ -285,7 +285,7 @@
           var headerCell = $(document.createElement('th'));
           headerCell.addClass('day-header');
           //@tqcenglish 对每周指定日期高亮
-          if (this.options.highlightDay.indexOf(d) !== -1) {
+          if (this.options.highlightDay.indexOf(d) === -1) {
             headerCell.addClass('hightlight-day-header');
           }
           headerCell.text(dates[this.options.language].daysMin[d]);
@@ -345,7 +345,12 @@
               var cellContent = $(document.createElement('div'));
               cellContent.addClass('day-content');
               cellContent.text(currentDate.getDate());
+              // tqcenglish@gmail.com 选中的星期修改字体
+              if(this.options.highlightDay.indexOf(currentDate.getDay()) === -1){
+                cellContent.addClass('hightlight-day-day');
+              }
               cell.append(cellContent);
+              console.log(cellContent)
 
               if (this.options.customDayRenderer) {
                 this
